@@ -16,6 +16,17 @@
 pip install emi-re
 ```
 
+## Usage
+
+CamelCase to snake_case
+
+```python
+>>> import emire
+>>> emire.to_snake_case("CamelCase")
+'camel_case'
+
+```
+
 ## License
 
 `emi-re` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
