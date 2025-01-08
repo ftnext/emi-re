@@ -5,11 +5,11 @@ build-backend = "hatchling.build"
 [project]
 name = "emi-re"
 dynamic = ["version"]
-description = ''
+description = 'Collection of regular expressions'
 readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
-keywords = []
+keywords = ["regular expression", "regex", "re"]
 authors = [
   { name = "ftnext", email = "takuyafjp+develop@gmail.com" },
 ]
@@ -23,6 +23,8 @@ classifiers = [
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Text Processing",
+  "Topic :: Text Processing :: General",
 ]
 dependencies = []
 
