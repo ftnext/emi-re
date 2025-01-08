@@ -3,6 +3,8 @@
 [![PyPI - Version](https://img.shields.io/pypi/v/emi-re.svg)](https://pypi.org/project/emi-re)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/emi-re.svg)](https://pypi.org/project/emi-re)
 
+Emi-re (pronunciation: [Emily](https://millionlive-theaterdays.idolmaster-official.jp/idol/emily/)) is a collection of regular expressions encountered during OSS code reading.
+
 -----
 
 ## Table of Contents
