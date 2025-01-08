@@ -27,6 +27,15 @@ CamelCase to snake_case
 
 ```
 
+Remove whitespaces
+
+```python
+>>> import emire
+>>> emire.remove_spaces("Algorithm C ないしは アルゴリズム C")
+'Algorithm CないしはアルゴリズムC'
+
+```
+
 ## License
 
 `emi-re` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.

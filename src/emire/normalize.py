@@ -42,3 +42,8 @@ class RemoveWhitespaceNormalizer:
             while pattern.search(text):
                 text = pattern.sub(r"\1\2", text)
         return text
+
+
+def remove_spaces(text: str) -> str:
+    normalizer = RemoveWhitespaceNormalizer()
+    return normalizer.normalize(text)
