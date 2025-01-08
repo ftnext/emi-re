@@ -32,25 +32,25 @@ Issues = "https://github.com/ftnext/emi-re/issues"
 Source = "https://github.com/ftnext/emi-re"
 
 [tool.hatch.version]
-path = "src/emi_re/__about__.py"
+path = "src/emire/__about__.py"
 
 [tool.hatch.envs.types]
 extra-dependencies = [
   "mypy>=1.0.0",
 ]
 [tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/emi_re tests}"
+check = "mypy --install-types --non-interactive {args:src/emire tests}"
 
 [tool.coverage.run]
-source_pkgs = ["emi_re", "tests"]
+source_pkgs = ["emire", "tests"]
 branch = true
 parallel = true
 omit = [
-  "src/emi_re/__about__.py",
+  "src/emire/__about__.py",
 ]
 
 [tool.coverage.paths]
-emi_re = ["src/emi_re", "*/emi-re/src/emi_re"]
+emi_re = ["src/emire", "*/emi-re/src/emire"]
 tests = ["tests", "*/emi-re/tests"]
 
 [tool.coverage.report]
