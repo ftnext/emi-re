@@ -10,6 +10,7 @@ Emi-re (pronunciation: [Emily](https://millionlive-theaterdays.idolmaster-offici
 ## Table of Contents
 
 - [Installation](#installation)
+- [Usage](#usage)
 - [License](#license)
 
 ## Installation
@@ -29,7 +30,7 @@ CamelCase to snake_case
 
 ```
 
-Remove whitespaces
+Remove whitespaces (in Japanese)
 
 ```python
 >>> import emire
