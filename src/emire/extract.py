@@ -20,4 +20,6 @@ def extract_json(markdown: str) -> str:
     match = re.search(pattern, markdown, re.DOTALL)
     if match:
         return match.group(1)
-    raise ValueError("No JSON block found in the provided markdown.")
+
+    message = "No JSON block found in the provided markdown."
+    raise ValueError(message)
