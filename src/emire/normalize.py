@@ -21,14 +21,12 @@ class RemoveWhitespaceNormalizer:
     """
 
     basic_latin = "\u0000-\u007f"
-    blocks = "".join(
-        (
-            "\u4e00-\u9fff",  # CJK UNIFIED IDEOGRAPHS
-            "\u3040-\u309f",  # HIRAGANA
-            "\u30a0-\u30ff",  # KATAKANA
-            "\u3000-\u303f",  # CJK SYMBOLS AND PUNCTUATION
-            "\uff00-\uffef",  # HALFWIDTH AND FULLWIDTH FORMS
-        )
+    blocks = (
+        "\u4e00-\u9fff"  # CJK UNIFIED IDEOGRAPHS
+        "\u3040-\u309f"  # HIRAGANA
+        "\u30a0-\u30ff"  # KATAKANA
+        "\u3000-\u303f"  # CJK SYMBOLS AND PUNCTUATION
+        "\uff00-\uffef"  # HALFWIDTH AND FULLWIDTH FORMS
     )
 
     def __init__(self) -> None:
