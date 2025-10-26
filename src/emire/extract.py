@@ -15,6 +15,9 @@ def extract_json(markdown: str) -> str:
     ... '''
     >>> extract_json(md)
     '{\n  "key": "value",\n  "number": 123\n}'
+    >>> import json
+    >>> json.loads(extract_json(md))
+    {'key': 'value', 'number': 123}
     """
     pattern = r"```json\s*(.*?)\s*```"
     match = re.search(pattern, markdown, re.DOTALL)
