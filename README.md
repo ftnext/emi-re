@@ -39,6 +39,19 @@ Remove whitespaces (in Japanese)
 
 ```
 
+Extract JSON from code block in Markdown
+
+```python
+>>> import emire
+>>> emire.extract_json('''```json
+... {
+...   "foo": "bar"
+... }
+... ```''')
+'{\n  "foo": "bar"\n}'
+
+```
+
 ## License
 
 `emi-re` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
