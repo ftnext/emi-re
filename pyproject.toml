@@ -72,3 +72,7 @@ exclude_lines = [
 
 [tool.ruff.lint.per-file-ignores]
 "src/emire/normalize.py" = ["RUF002"]
+
+[tool.maturin]
+bindings = "pyo3"
+manifest-path = "bindings-py/Cargo.toml"
