@@ -1,0 +1,10 @@
+[package]
+name = "emire-core"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+name = "emire_core"
+
+[dependencies]
+regex = "1.13.1"
