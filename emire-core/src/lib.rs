@@ -1,9 +1,9 @@
 use regex::Regex;
 
-pub fn extract_json(markdown: &str) -> String {
+pub fn extract_json(markdown: &str) -> Option<&str> {
     let re = Regex::new(r"(?s)```json\s*(.*?)\s*```").unwrap();
-    let captures = re.captures(markdown).unwrap();
-    captures.get(1).unwrap().as_str().to_string()
+    let captures = re.captures(markdown)?;
+    Some(captures.get(1)?.as_str())
 }
 
 #[cfg(test)]
@@ -24,10 +24,12 @@ More text here.
 "#;
         assert_eq!(
             extract_json(markdown),
-            r#"{
+            Some(
+                r#"{
   "key": "value",
   "number": 123
 }"#
+            )
         )
     }
 }
