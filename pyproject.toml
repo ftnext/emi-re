@@ -1,6 +1,6 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
 
 [project]
 name = "emi-re"
@@ -34,44 +34,6 @@ dependencies = []
 Documentation = "https://github.com/ftnext/emi-re#readme"
 Issues = "https://github.com/ftnext/emi-re/issues"
 Source = "https://github.com/ftnext/emi-re"
-
-[tool.hatch.version]
-path = "src/emire/__about__.py"
-
-[tool.hatch.build.targets.wheel]
-packages = ["src/emire"]
-
-[[tool.hatch.envs.hatch-test.matrix]]
-python = ["3.9", "3.10", "3.11", "3.12", "3.13"]
-
-[tool.hatch.envs.types]
-extra-dependencies = [
-  "mypy>=1.0.0",
-]
-[tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/emire tests}"
-
-[tool.coverage.run]
-source_pkgs = ["emire", "tests"]
-branch = true
-parallel = true
-omit = [
-  "src/emire/__about__.py",
-]
-
-[tool.coverage.paths]
-emi_re = ["src/emire", "*/emi-re/src/emire"]
-tests = ["tests", "*/emi-re/tests"]
-
-[tool.coverage.report]
-exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-]
-
-[tool.ruff.lint.per-file-ignores]
-"src/emire/normalize.py" = ["RUF002"]
 
 [tool.maturin]
 bindings = "pyo3"

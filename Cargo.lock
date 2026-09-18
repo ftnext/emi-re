@@ -13,7 +13,7 @@ dependencies = [
 
 [[package]]
 name = "bindings-py"
-version = "0.0.1"
+version = "0.2.0"
 dependencies = [
  "emire-core",
  "pyo3",
@@ -21,7 +21,7 @@ dependencies = [
 
 [[package]]
 name = "emire-core"
-version = "0.0.1"
+version = "0.2.0"
 dependencies = [
  "regex",
 ]
