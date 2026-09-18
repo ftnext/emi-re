@@ -25,7 +25,7 @@ CamelCase to snake_case
 
 ```python
 >>> import emire
->>> emire.to_snake_case("CamelCase")  # doctest: +SKIP
+>>> emire.to_snake_case("CamelCase")
 'camel_case'
 
 ```
