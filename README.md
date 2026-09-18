@@ -36,19 +36,26 @@ Remove whitespaces (in Japanese)
 >>> import emire
 >>> emire.remove_spaces("Algorithm C ないしは アルゴリズム C")
 'Algorithm CないしはアルゴリズムC'
+>>> import emire.normalize
+>>> emire.normalize.RemoveWhitespaceNormalizer().normalize("Algorithm C ないしは アルゴリズム C")
+'Algorithm CないしはアルゴリズムC'
 
 ```
 
 Extract JSON from code block in Markdown
 
 ```python
+>>> import json
 >>> import emire
 >>> emire.extract_json('''```json
 ... {
-...   "foo": "bar"
+...   "key": "value",
+...   "number": 123
 ... }
 ... ```''')
-'{\n  "foo": "bar"\n}'
+'{\n  "key": "value",\n  "number": 123\n}'
+>>> json.loads(_)
+{'key': 'value', 'number': 123}
 
 ```
 

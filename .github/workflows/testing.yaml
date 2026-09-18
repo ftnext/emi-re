@@ -1,25 +1,103 @@
 name: Run tests
 
-on: [push]
+on:
+  push:
+  workflow_call:
+
+permissions:
+  contents: read
 
 jobs:
-  tests:
-    runs-on: ubuntu-latest
-
+  cargo-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v4
-      - uses: pypa/hatch@install
-      - name: Run tests
-        run: hatch test --randomize --all -vv --doctest-modules
-
-  doctest:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.12'
-      - uses: pypa/hatch@install
+      - uses: actions-rust-lang/setup-rust-toolchain@ecabd13d1c56bd1345c230e542e9144811ad706f # v2.0.0
+      - name: Run tests
+        run: cargo test
+
+  wheels:
+    name: Wheel (${{ matrix.platform.name }})
+    needs: cargo-test
+    runs-on: ${{ matrix.platform.runner }}
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - name: linux-x86_64
+            runner: ubuntu-22.04
+            target: x86_64
+            python-architecture: x64
+            manylinux: auto
+          - name: macos-x86_64
+            runner: macos-15-intel
+            target: x86_64
+            python-architecture: x64
+            manylinux: auto
+          - name: macos-aarch64
+            runner: macos-15
+            target: aarch64
+            python-architecture: arm64
+            manylinux: auto
+          - name: windows-x64
+            runner: windows-latest
+            target: x64
+            python-architecture: x64
+            manylinux: auto
+          - name: windows-x86
+            runner: windows-latest
+            target: x86
+            python-architecture: x86
+            manylinux: auto
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+          architecture: ${{ matrix.platform.python-architecture }}
+      - uses: PyO3/maturin-action@e83996d129638aa358a18fbd1dfb82f0b0fb5d3b # v1.51.0
+        with:
+          target: ${{ matrix.platform.target }}
+          manylinux: ${{ matrix.platform.manylinux }}
+          args: --release --out dist
+      - name: Check and install wheel
+        run: |
+          python -m pip install twine
+          python -m twine check --strict dist/*
+          python -m pip install dist/*.whl
       - name: Test Usage code examples
-        run: hatch run python -m doctest -v README.md
+        run: python -m doctest -v README.md
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: pypi-files-${{ matrix.platform.name }}
+          path: dist/*.whl
+          if-no-files-found: error
+
+  sdist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - uses: PyO3/maturin-action@e83996d129638aa358a18fbd1dfb82f0b0fb5d3b # v1.51.0
+        with:
+          command: sdist
+          args: --out dist
+      - name: Check source distribution
+        run: pipx run twine check --strict dist/*
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: pypi-files-sdist
+          path: dist/*.tar.gz
+          if-no-files-found: error

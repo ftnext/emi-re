@@ -1,0 +1,12 @@
+[package]
+name = "bindings-py"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+name = "emire"
+crate-type = ["cdylib"]
+
+[dependencies]
+emire-core = { path = "../emire-core" }
+pyo3 = { version = "0.29.2", features = ["extension-module", "abi3-py310"] }
