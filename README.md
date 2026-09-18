@@ -34,7 +34,10 @@ Remove whitespaces (in Japanese)
 
 ```python
 >>> import emire
->>> emire.remove_spaces("Algorithm C ないしは アルゴリズム C")  # doctest: +SKIP
+>>> emire.remove_spaces("Algorithm C ないしは アルゴリズム C")
+'Algorithm CないしはアルゴリズムC'
+>>> import emire.normalize
+>>> emire.normalize.RemoveWhitespaceNormalizer().normalize("Algorithm C ないしは アルゴリズム C")
 'Algorithm CないしはアルゴリズムC'
 
 ```
